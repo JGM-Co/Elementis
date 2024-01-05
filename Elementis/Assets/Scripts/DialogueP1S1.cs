@@ -68,11 +68,16 @@ public class Dialogue : MonoBehaviour
             userInput();
             Invoke("Delay", 0.1f);
         }
-        else if (conversationControl == 4)
+        else if (conversationControl == 4 && nameInput.text.Length > 0)
         {
             //Call the function that takes the inputed name and stores it in a variable
             getPlayerName();
             Invoke("Delay", 0.1f);
+        }
+        else if (conversationControl == 4 && nameInput.text.Length == 0)
+        {
+            //If the user clicks the button but they don't have a name put in, don't increase the variable, but give them more chances to press the button
+            dialogueProgression.enabled = true;
         }
         else if (conversationControl == 5)
         {
@@ -109,7 +114,6 @@ public class Dialogue : MonoBehaviour
         {
             //Ends the cutscene and loads the next scene
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
         }
     }
 
