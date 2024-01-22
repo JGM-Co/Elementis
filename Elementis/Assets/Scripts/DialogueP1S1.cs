@@ -11,7 +11,9 @@ public class Dialogue : MonoBehaviour
     public Button dialogueProgression, option1, option2;
     public GameObject uInput, dialogue, speakerBox, speaker, option1ya, option2ya, dialogueProgressionya, fpUp, fpDown;
     public string playerName;
-    public AudioSource buttonClick;
+    public AudioSource buttonClick, pointsUp, pointsDown;
+    public Transform mcPos;
+    public Animator mcAnimator;
 
 
     private void Start()
@@ -29,8 +31,10 @@ public class Dialogue : MonoBehaviour
         option2ya.SetActive(false);
         fpUp.SetActive(false);
         fpDown.SetActive(false);
+        //Set the MC's y position
+        mcPos.position = new Vector2(-0.02f, -1.56f);
         //Call the method that shows the dialogue progression button after the initial timeline animations have played
-        Invoke("startConversation", 16 - Time.deltaTime);
+        Invoke("startConversation", 0.1f);
     }
 
     public void startConversation()
@@ -55,6 +59,8 @@ public class Dialogue : MonoBehaviour
         } else if (conversationControl == 1)
         {
             dialogueText.text = "What? You can't remember anything?!";
+            mcPos.position = new Vector2(-0.02f, -1.28f);
+            mcAnimator.Play("MC Sideways Idle 1");
             Invoke("Delay", 0.1f);
         }
         else if (conversationControl == 2)
@@ -150,6 +156,7 @@ public class Dialogue : MonoBehaviour
     public void dialogueOption1 ()
     {
         buttonClick.Play();
+        pointsDown.Play();
         //If the player picks the first dialogue option...
         //Decrease friendship points with Graham by 5
         grahamPoints -= 5;
@@ -166,6 +173,7 @@ public class Dialogue : MonoBehaviour
     public void dialogueOption2()
     {
         buttonClick.Play();
+        pointsUp.Play();
         //If the player picks the second dialogue option...
         //Increase friendship points with Graham by 5
         grahamPoints += 5;

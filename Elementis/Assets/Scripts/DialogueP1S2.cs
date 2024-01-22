@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DialogueP1S2 : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class DialogueP1S2 : MonoBehaviour
     public Button dialogueProgression;
     public GameObject dialogue, speakerBox, speaker, dialogueProgressionya;
     public AudioSource buttonClick;
+    public Animator mcAnimator;
 
     private void Start()
     {
@@ -18,6 +20,7 @@ public class DialogueP1S2 : MonoBehaviour
         speakerName.text = "???";
         conversationControl = 0;
         Invoke("changeText", 18f - Time.deltaTime);
+        
         
     }
     public void conversationProgression()
@@ -98,12 +101,17 @@ public class DialogueP1S2 : MonoBehaviour
             dialogueText.text = "used Elementim cards in the past.";
             Invoke("Delay", .1f);
         }
+        else if (conversationControl == 14)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
     public void changeText()
     {
         dialogueText.text = "Ugh...Inimicus grunts.";
         speakerName.text = "Graham";
         dialogueProgression.enabled = true;
+        mcAnimator.Play("MC Sideways Idle 1");
     }
     public void Delay()
     {
