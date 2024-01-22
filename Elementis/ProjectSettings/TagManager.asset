@@ -5,6 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - NPC
+  - midHeal
+  - lilHeal
+  - hiHeal
+  - earth
+  - fire
+  - lightning
+  - wind
+  - water
   layers:
   - Default
   - TransparentFX
@@ -12,7 +20,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Character
   - 
   - 
   - 
